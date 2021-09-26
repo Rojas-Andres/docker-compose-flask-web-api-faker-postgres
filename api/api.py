@@ -27,6 +27,16 @@ def crear_registros():
         db.session.commit()
     return response_json
 
+@app.route('/eliminar_registros')
+def eliminar_registros():
+    with engine.connect() as con:
+        eliminar = "delete from datafaker"
+        try:
+            respuesta_data = con.execute(eliminar)
+            resul = "data eliminada"
+        except:
+            resul = "Data no eliminada"
+        return {'data':resul}
 @app.route('/registros_faker')
 def registros_faker():
     with engine.connect() as con:
