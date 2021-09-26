@@ -14,6 +14,7 @@ def datos():
         data["city"] = fake.city()
         data["address"] = fake.address()
         data["phone_number"] = fake.phone_number()
+        data["color"] = fake.color()
         lista.append(data)
     return jsonify({"datos":lista})
 

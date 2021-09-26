@@ -12,3 +12,4 @@ class DataFaker(db.Model):
     ciudad = db.Column(db.String(120))
     direccion = db.Column(db.String(200))
     telefono = db.Column(db.String(40))
+    color = db.Column(db.String(40))

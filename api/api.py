@@ -20,7 +20,7 @@ def crear_registros():
     response = requests.get(url)
     response_json = json.loads(response.text)
     for i in response_json["datos"]:
-        data = DataFaker(nombre=i["name"], nombre_compania=i["company_email"], ciudad=i["city"],direccion=i["address"],telefono=i["phone_number"])
+        data = DataFaker(nombre=i["name"], nombre_compania=i["company_email"], ciudad=i["city"],direccion=i["address"],telefono=i["phone_number"],color=i["color"])
         db.session.add(data)
     db.session.commit()
     return {'data':"Registros creados"}
@@ -49,6 +49,7 @@ def registros_faker():
             data["ciudad"] = i[3]
             data["direccion"] = i[4]
             data["telefono"] = i[5]
+            data["color"] = i[6]
             lista.append(data)
         return {'data':lista}
 
