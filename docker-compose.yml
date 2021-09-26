@@ -5,10 +5,8 @@ services:
     image: postgres:12-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=hello_flask
-      - POSTGRES_PASSWORD=hello_flask
-      - POSTGRES_DB=hello_flask_dev
+    env_file:
+      - ./database/database.env
     ports:
       - "5432:5432"
 
