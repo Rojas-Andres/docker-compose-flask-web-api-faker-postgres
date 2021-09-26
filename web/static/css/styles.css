@@ -12,5 +12,7 @@ td{
 table {
     width: 100%;
     border-collapse: collapse;
-
+}
+.encabezado_tabla{
+    background: #255AAA;
 }
