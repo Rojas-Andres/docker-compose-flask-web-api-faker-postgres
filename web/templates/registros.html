@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-    <table>
+    <table id="data-table_code">
         <tr>
             <th>nombre</th>
             <th>nombre_compania</th>
@@ -17,6 +17,7 @@
             <th>direccion</th>
             <th>telefono</th>
         </tr>
+        <!--
         {% for i in data %}
         <tr>
             <td>{{i.name}}</td>
@@ -26,7 +27,63 @@
             <td>{{i.telefono}}</td>
             
         </tr>
-        {% endfor %}
+        {% endfor %}-->
     </table>
+   <script type="text/javascript">
+
+        $(document).ready(function() {
+            $.ajax({
+                type: 'POST',
+                url: "/registros",
+                data: {
+                    "csrfmiddlewaretoken": "{{ csrf_token }}",
+                },
+                beforeSend: function(){
+                    console.log("Enviando request...");
+                },
+                success: function (response) {
+                    pintarTabla(response.data);
+                    $("#loader").css({"visibility": "hidden"});         
+                },
+                
+                error: function (response) {
+                  alert("Paila")
+                }
+            });
+        });
+        function pintarTabla(data){
+            $('#data-table_code').DataTable().destroy();
+            $('#data-table_code').show();
+            $('#data-table_code').DataTable({
+                dom: 'B<"clear">rtip',
+                pageLength: 6,
+                buttons: {
+                    name: 'primary',
+                    buttons: [
+                    'copy', 'csv', 'excel','pdf'
+                    ]
+                },
+                "data": data,
+                "columns": [
+                    { "data": "name" },
+                    { "data": "nombre_compania" },
+                    { "data": "ciudad" },
+                    { "data": "direccion" },
+                    { "data": "telefono" },    
+                ], select: true,
+                lengthMenu: [
+                    [15, 30, 45, -1],
+                    ["15 Rows", "30 Rows", "45 Rows", "Todo"]
+                ],
+                language: {
+                    searchPlaceholder: "Buscar Datos",
+                    infoEmpty: "La tabla no tiene registros",
+                    zeroRecords: "Uppps, No tenemos resultados para tu busqueda",
+                },
+            });
+    
+        }
+     
+    </script> 
 </body>
 </html>
