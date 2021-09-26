@@ -11,3 +11,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 session = Session()
 from models import *
+@app.route('/')
+def hola():
+    return {"mensaje":'holas'}
+
+if __name__ == '__main__':
+   app.run(host='0.0.0.0', port=80, debug=True)
