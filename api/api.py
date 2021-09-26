@@ -25,7 +25,7 @@ def crear_registros():
         data = DataFaker(nombre=i["name"], nombre_compania=i["company_email"], ciudad=i["city"],direccion=i["address"],telefono=i["phone_number"])
         db.session.add(data)
     db.session.commit()
-    return response_json
+    return {'data':"Registros creados"}
 
 @app.route('/eliminar_registros')
 def eliminar_registros():

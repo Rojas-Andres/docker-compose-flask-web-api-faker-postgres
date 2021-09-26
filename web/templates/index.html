@@ -12,13 +12,14 @@
 <body>
     <h2>Bienvenidos</h2>
     <div>
-        <form id="crear-registros" method="POST" action="/crear_registros">
-            <button type="submit">Crear 13 registros</button>
+        <form id="crear-registros" method="POST">
+            <button type="submit" class="btn btn-primary" >Crear 13 registros</button>
         </form>
     </div>
+    <br/>
     <div>
-        <form id="eliminar-registros" method="POST" action="/eliminar_registros">
-            <button type="submit">Eliminar todos los registros</button>
+        <form id="eliminar-registros" method="POST">
+            <button type="submit" class="btn btn-primary">Eliminar todos los registros</button>
         </form>
     </div>
     <h1>Registros</h1>
@@ -46,7 +47,6 @@
                 },
                 success: function (response) {
                     console.log("Registros eliminados")
-                    alert("Registros eliminados")
                 },
                 error: function (response) {
                   console.log(response)
@@ -63,7 +63,6 @@
                 },
                 success: function (response) {
                     console.log("Registros creados")
-                    alert("Registros creados")
                 },
                 error: function (response) {
                   console.log(response)
