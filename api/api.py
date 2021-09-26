@@ -21,17 +21,26 @@ def crear_registros():
     url = 'http://faker-service/datos'
     response = requests.get(url)
     response_json = json.loads(response.text)
-    '''
-    for i in range(response_json["datos"]):
-        #data = DataFaker(nombre=i["name"], nombre_compania=i["company_email"], ciudad=i["city"],direccion=i["address"],telefono=i["phone_number"])
-        #db.session.add(data)
-        #db.session.commit()
-        print(i)
-    '''
     for i in response_json["datos"]:
         data = DataFaker(nombre=i["name"], nombre_compania=i["company_email"], ciudad=i["city"],direccion=i["address"],telefono=i["phone_number"])
         db.session.add(data)
         db.session.commit()
     return response_json
+
+@app.route('/registros_faker')
+def registros_faker():
+    with engine.connect() as con:
+        obtener_data = "select * from datafaker"
+        respuesta_data = con.execute(obtener_data)
+        lista = list()
+        for i in respuesta_data:
+            data = dict()
+            data["name"] = i[1]
+            data["nombre_compania"] = i[2]
+            data["ciudad"] = i[3]
+            data["direccion"] = i[4]
+            data["telefono"] = i[5]
+            lista.append(data)
+        return {'data':lista}
 if __name__ == '__main__':
    app.run(host='0.0.0.0', port=80, debug=True)
