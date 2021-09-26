@@ -6,6 +6,7 @@ Luego de que los contenedores esten arriba , se puede validar si todos se subier
     - docker ps
 
 Puertos habilitados para los contenedores:
+
     - 5000 -> El objetivo del contenedor que esta en este puerto es por medio de los botones consumir las apis que se crearon en el contenedor de api-service.
 
     - 5001 -> El unico objetivo del contenedor que se encuentra en este puerto es responder las solicitudes que le envia la app de la web.
