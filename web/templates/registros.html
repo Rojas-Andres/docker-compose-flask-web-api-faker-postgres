@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link type="text/css" rel="stylesheet" href="../static/styles.css" media="screen,projection" />
+    <link rel="stylesheet" href="">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,13 +17,14 @@
             <th>direccion</th>
             <th>telefono</th>
         </tr>
-        {% for i in datos %}
+        {% for i in data %}
         <tr>
-            <td>i.nombre</td>
-            <td>i.nombre_compania</td>
-            <td>i.ciudad</td>
-            <td>i.direccion</td>
-            <td>i.telefono</td>
+            <td>{{i.name}}</td>
+            <td>{{i.nombre_compania}}</td>
+            <td>{{i.ciudad}}</td>
+            <td>{{i.direccion}}</td>
+            <td>{{i.telefono}}</td>
+            
         </tr>
         {% endfor %}
     </table>

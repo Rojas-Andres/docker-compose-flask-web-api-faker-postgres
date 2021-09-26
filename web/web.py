@@ -18,10 +18,17 @@ def crear_registros():
     #Crear registros
     url = 'http://api-service/crear_registros'
     response = requests.get(url)
+    return render_template('creados.html')
+
+
+@app.route('/registros', methods=['GET'])
+def registros(): 
     # Renderizar la cantidad de registros
     url = 'http://api-service/registros_faker'
+    response = requests.get(url)
     response_json = json.loads(response.text)
 
-    return render_template('registros.html',data=response_json)
+    return render_template('registros.html',data=response_json["data"])
+
 if __name__ == '__main__':
    app.run(host='0.0.0.0', port=80, debug=True)
