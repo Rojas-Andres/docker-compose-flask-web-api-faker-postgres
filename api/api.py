@@ -12,12 +12,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 session = Session()
 from models import *
-@app.route('/')
-def hola():
-    return jsonify({"mensaje":'holas'})
+
+
 @app.route('/crear_registros')
 def crear_registros():
-    print("entre ")
     url = 'http://faker-service/datos'
     response = requests.get(url)
     response_json = json.loads(response.text)
@@ -37,6 +35,7 @@ def eliminar_registros():
         except:
             resul = "Data no eliminada"
         return {'data':resul}
+
 @app.route('/registros_faker')
 def registros_faker():
     with engine.connect() as con:
@@ -52,5 +51,6 @@ def registros_faker():
             data["telefono"] = i[5]
             lista.append(data)
         return {'data':lista}
+
 if __name__ == '__main__':
    app.run(host='0.0.0.0', port=80, debug=True)

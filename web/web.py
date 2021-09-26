@@ -20,6 +20,7 @@ def registros():
     response_json = json.loads(response.text)
 
     return jsonify({"data":response_json["data"]})
+
 @app.route('/eliminar_registros', methods=['POST'])
 def eliminar_registros(): 
     # Renderizar la cantidad de registros
@@ -28,15 +29,12 @@ def eliminar_registros():
     response_json = json.loads(response.text)
     return redirect(url_for('index'))
 
-    #return jsonify({"resultado":response_json["data"]})
 @app.route('/crear_registros', methods=['POST'])
 def crear_registros():
     #Crear registros
     url = 'http://api-service/crear_registros'
     response = requests.get(url)
     response_json = json.loads(response.text)
-
-    #return render_template('creados.html',response="Creados satisfactoriamente")
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
