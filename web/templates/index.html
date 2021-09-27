@@ -41,6 +41,7 @@
     
     <script type="text/javascript">
         $('#eliminar-registros').submit((event) => {
+            event.preventDefault();
             $.ajax({
                 type: 'POST',
                 url: "/eliminar_registros",
@@ -48,6 +49,7 @@
                     console.log("Enviando request...");
                 },
                 success: function (response) {
+                    pintarTabla(response.data);
                     console.log("Registros eliminados")
                 },
                 error: function (response) {
@@ -56,15 +58,17 @@
                 }
             });
         });
+
         $('#crear-registros').submit((event) => {
+            event.preventDefault();
             $.ajax({
                 type: 'POST',
                 url: "/crear_registros",
                 beforeSend: function(){
-                    console.log("Enviando request...");
+                    console.log("Enviando request desde crear...");
                 },
                 success: function (response) {
-                    console.log("Registros creados")
+                    pintarTabla(response.data);
                 },
                 error: function (response) {
                   console.log(response)
@@ -72,6 +76,7 @@
                 }
             });
         });
+        
         $(document).ready(function() {
             $.ajax({
                 type: 'GET',

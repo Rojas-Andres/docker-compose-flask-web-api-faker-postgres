@@ -4,13 +4,17 @@ import json
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    # Renderizar la cantidad de registros
+def datos():
     url = 'http://api-service/registros_faker'
     response = requests.get(url)
     response_json = json.loads(response.text)
-    return render_template('index.html',data=response_json["data"])
+    return response_json
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    # Renderizar la cantidad de registros
+    datos_actuales = datos()
+    return render_template('index.html',data=datos_actuales["data"])
 
 @app.route('/registros', methods=['GET'])
 def registros(): 
@@ -27,7 +31,10 @@ def eliminar_registros():
     url = 'http://api-service/eliminar_registros'
     response = requests.get(url)
     response_json = json.loads(response.text)
-    return redirect(url_for('index'))
+
+    # Carga tabla con los datos actuales
+    datos_actuales = datos()
+    return jsonify({"data":[]})
 
 @app.route('/crear_registros', methods=['POST'])
 def crear_registros():
@@ -35,7 +42,10 @@ def crear_registros():
     url = 'http://api-service/crear_registros'
     response = requests.get(url)
     response_json = json.loads(response.text)
-    return redirect(url_for('index'))
+
+    # Carga tabla con los datos actuales
+    datos_actuales = datos()
+    return jsonify({"data":datos_actuales["data"]})
 
 if __name__ == '__main__':
    app.run(host='0.0.0.0', port=80, debug=True)
