@@ -1,7 +1,5 @@
-#!/usr/bin/env bash
-
+#!/bin/bash
 va=$(python valida_database.py 2>&1)
-
 if [[ $va -ne '1' ]];
 then
     python manage.py db init
