@@ -17,3 +17,4 @@ python manage.py db migrate
 python manage.py db upgrade
 echo $va
 python api.py 
+
